@@ -29,4 +29,4 @@ root.right.left = new TreeNode(6);
 root.left = new TreeNode(0);
 
 const result = inorderTraversal(root);
-console.log(result); // Output: [0, 1, 6, 2]
+console.log(result);
