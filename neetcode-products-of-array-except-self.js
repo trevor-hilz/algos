@@ -27,12 +27,15 @@ class Solution {
       prefix *= nums[i];
     }
 
+    console.log(res);
+
     let suffix = 1;
     for (let i = n - 1; i >= 0; i--) {
-      console.log(res[i], suffix)
       res[i] *= suffix;
       suffix *= nums[i];
+      console.log(res[i], suffix)
     }
+    console.log(res);
     return res;
   }
 }
