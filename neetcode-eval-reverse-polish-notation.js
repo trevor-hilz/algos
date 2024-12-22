@@ -4,28 +4,27 @@ class Solution {
    * @return {number}
    */
   evalRPN(tokens) {
-    const ops = {
-      '+': (a, b) => a + b,
-      '-': (a, b) => a - b,
-      '*': (a, b) => a * b,
-      '/': (a, b) => Math.trunc(a / b),
-    };
-    let cache = [];
-    for (const token of tokens) {
-      if (Object.hasOwn(ops, token)) {
-        if (token in ops) {
-          const b = cache.pop();
-          const a = cache.pop();
-          cache.push(ops[token](a, b));
-        }
-      } else {
-        cache.push(parseInt(token));
-      }
+    let stack = [];
+    for (const t of tokens) {
+      if (t === '+') {
+        stack.push(stack.pop() + stack.pop());
+      } else if (t === '-') {
+        const a = stack.pop();
+        const b = stack.pop();
+        stack.push(b - a);
+      } else if (t === '*') {
+        stack.push(stack.pop() * stack.pop());
+      } else if (t === '/') {
+        const a = stack.pop();
+        const b = stack.pop();
+        stack.push(Math.trunc(b / a));
+      } else stack.push(parseInt(t));
     }
-    return cache[0];
+    return stack[0];
   }
 }
 
 const t = new Solution();
 
 console.log(t.evalRPN(['1', '2', '+', '3', '*', '4', '-']));
+console.log(t.evalRPN(['2', '1', '+', '3', '*']));
