@@ -18,6 +18,7 @@ class Solution {
         let curr = head;
 
         while (curr) {
+            console.log(curr);
             let temp = curr.next;
             curr.next = prev;
             prev = curr;
