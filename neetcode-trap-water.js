@@ -5,28 +5,21 @@ class Solution {
    */
   trap(height) {
     let output = 0;
-    const arr = [];
+    let l = 0;
+    let r = height.length - 1;
+    let leftMax = height[l];
+    let rightMax = height[r];
 
-    while (height[0] === 0) {
-      height.shift();
-    }
-
-    for (let i = height.length - 1; i >= 1; i--) {
-      if (height[i - 1] < height[i]) {
-        height = height.slice(0, i);
-        break;
+    while (l < r) {
+      if (leftMax < rightMax) {
+        l += 1;
+        leftMax = Math.max(leftMax, height[l]);
+        output += leftMax - height[l];
+      } else {
+        r -= 1;
+        rightMax = Math.max(rightMax, height[r]);
+        output += rightMax - height[r];
       }
-    }
-
-    let first = height.shift();
-
-    for (let i = 0; i < height.length; i++) {
-      if (height[i] < first) {
-        output += first - height[i];
-      } else if (height[i] > first) {
-        first = height[i];
-      }
-      console.log(first, height[i], output);
     }
     return output;
   }
